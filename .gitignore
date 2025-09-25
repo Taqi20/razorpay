@@ -1,0 +1,26 @@
+# Node
+node_modules/
+npm-debug.log
+yarn.lock
+pnpm-lock.yaml
+
+# Next.js build
+client/.next/
+client/node_modules/
+
+# Server build
+server/dist/
+server/node_modules/
+
+# Env
+.env
+client/.env.local
+server/.env
+
+# OS
+.DS_Store
+
+# Logs
+logs
+*.log
+GIT
