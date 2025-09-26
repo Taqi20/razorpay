@@ -1,4 +1,6 @@
 'use client';
+
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function LoginPage() {
@@ -7,6 +9,8 @@ export default function LoginPage() {
     const [sent, setSent] = useState(false);
     const [otp, setOtp] = useState('');
     const [message, setMessage] = useState('');
+
+    const router = useRouter();
 
     async function sendOtp() {
         setSending(true);
@@ -19,6 +23,7 @@ export default function LoginPage() {
                 body: JSON.stringify({
                     phone
                 }),
+                credentials: 'include',
             });
 
             const data = await res.json();
@@ -45,11 +50,13 @@ export default function LoginPage() {
                     phone,
                     code: otp
                 }),
+                credentials: 'include',
             });
 
             const data = await res.json();
             if (!res.ok) throw new Error(data?.error || 'Invalid OTP');
             setMessage('Verified! Token set in cookie.');
+            router.push('/dashboard');
 
         } catch (err: any) {
             setMessage(err.message || 'Error');
